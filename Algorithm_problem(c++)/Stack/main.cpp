@@ -16,7 +16,7 @@ void InitStack(Stack &S)
     S.top = -1; // 栈顶指向-1，表示空栈
 }
 
-bool StackEmpty(Stack S) // 判断栈空
+bool StackEmpty(Stack S) // 判断栈空。
 {
     if (S.top == -1)
         return true;
