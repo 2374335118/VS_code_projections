@@ -1,11 +1,63 @@
 #include"function.h"
 
+void PreOrder(tree t)//前序遍历、先序遍历、深度优先遍历
+{
+    if(t!=NULL)
+    {
+        printf("%c", t->e);
+        PreOrder(t->lchild);
+        PreOrder(t->rchild);
+    }
+}
+
+void InOrder(tree t)//中序 
+{
+    if(t!=NULL)
+    {
+        InOrder(t->lchild);
+        printf("%c",t->e);
+        InOrder(t->rchild);
+    }
+}
+
+void PostOrder(tree t)//后序
+{
+    if(t!=NULL)
+    {
+        PostOrder(t->lchild);
+        PostOrder(t->rchild);
+        printf("%c",t->e);
+    }
+}
+
+void LevelOrder(tree t)
+{
+    Queue Q;
+    InitQueue(Q);
+    tree p;//存储出队的节点
+    RearInsert(Q,t);
+    while(!Isempty(Q))
+    {
+        FrontDelete(Q,p);
+        printf("%c",p->e);
+        if(p->lchild!=NULL)
+        {
+            RearInsert(Q,p->lchild);
+        }
+        if(p->rchild!=NULL)
+        {
+            RearInsert(Q,p->rchild);
+        }
+    }
+}
 int main()
 {
     tree pnew;//申请树的一个新节点
     tree root=NULL;//树根为空代表空树
-    Elemtype c;
-    tag queuenew=NULL,pfront=NULL,prear=NULL,pcur=NULL;
+    char c;
+    Queue queuenew;
+    LinkList pcur=(LinkList)calloc(1,sizeof(Node));
+    InitQueue(queuenew);
     while(scanf("%c",&c))
     {
         if(c=='\n')
@@ -14,31 +66,37 @@ int main()
         }
         pnew=(tree)calloc(1,sizeof(Tree));//calloc申请树节点空间同时初始化NULL，空间大小为1*sizeof(Tree)
         pnew->e=c;
-        queuenew = (tag)calloc(1, sizeof(Tag)); // calloc申请队列节点空间
-        queuenew->t=pnew;
         if(root==NULL)
         {
             root=pnew;
-            pfront=queuenew;
-            prear=queuenew;
-            pcur=queuenew;//队头、队尾、节点指针pcur都等于queuenew
+            RearInsert(queuenew, pnew);
+            pcur->data=pnew;
+            pcur=queuenew.rear;
         }
         else
         {
             //尾插入队
-            prear->next=queuenew;
-            prear=queuenew;
+            RearInsert(queuenew, pnew);
             //queuenew入树
-            if(pcur->t->lchild==NULL)
+            if(pcur->data->lchild==NULL)
             {
-                pcur->t->lchild=pnew;
+                pcur->data->lchild=pnew;
             }
-            else if (pcur->t->rchild == NULL)
+            else if (pcur->data->rchild == NULL)
             {
-                pcur->t->rchild=pnew;
+                pcur->data->rchild=pnew;
                 pcur=pcur->next;
             }
         }
     }
+    // abcdefghij
+    printf("-------------------------------先序遍历结果-------------------------------------\n");
+    PreOrder(root);
+    printf("\n-------------------------------中序遍历结果-------------------------------------\n");
+    InOrder(root);
+    printf("\n-------------------------------后序遍历结果-------------------------------------\n");
+    PostOrder(root);
+    printf("\n-------------------------------层序遍历结果-------------------------------------\n");
+    LevelOrder(root);
     return 0;
 }
