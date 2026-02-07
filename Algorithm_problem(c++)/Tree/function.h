@@ -1,31 +1,32 @@
-#include<stdio.h>
 #include<iostream>
 
-
-typedef struct Tree//二叉树结构体
+typedef struct Tree
 {
-    char e;/* data */
-    struct Tree* lchild;
-    struct Tree* rchild;
+    char c;
+    struct  Tree* lchild;
+    struct  Tree* rchild;
 }Tree,*tree;
 
-
-
-typedef tree ElemType;
-
-typedef struct Node
+typedef tree Elemtype;
+typedef struct LNode
 {
-    ElemType data;     // 二叉树节点地址域
-    struct Node *next; // 节点指针域
-} Node, *LinkList;
+    Elemtype e;
+    struct LNode* next;
+}LNode,*linklist;
 
-typedef struct
+typedef struct Queue
 {
-    LinkList front; // 队头指针
-    LinkList rear;  // 队尾指针
-} Queue;
+    linklist front;
+    linklist rear;
+}Queue;
 
-bool Isempty(Queue Q);
-void FrontDelete(Queue &Q,ElemType &p);
-void RearInsert(Queue &Q, ElemType e);
+bool IsEmpty(Queue Q);
 void InitQueue(Queue &Q);
+void Rearinsert(Queue &Q, Elemtype newtree);
+void Frontdelete(Queue &Q, Elemtype &detree);
+
+void Treebuild(tree &t, Queue &Q);
+void PreOrder(tree t);
+void InOrder(tree t);
+void PostOrder(tree t);
+void LevelOrder(tree t);

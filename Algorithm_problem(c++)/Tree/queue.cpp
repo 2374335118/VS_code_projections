@@ -1,45 +1,37 @@
 #include"function.h"
 
+bool IsEmpty(Queue Q)
+{
+    return Q.front==Q.rear;
+}
+
 void InitQueue(Queue &Q)
 {
-    Q.front = (LinkList)malloc(sizeof(Node));
-    Q.rear = Q.front;
-    Q.front->next = NULL;
-    return;
+    Q.front=Q.rear=(linklist)malloc(sizeof(LNode));
+    Q.rear->next=NULL;
 }
 
-
-void RearInsert(Queue &Q, ElemType e)
+void Rearinsert(Queue &Q,Elemtype newtree)
 {
-    LinkList qnew = (LinkList)malloc(sizeof(Node));
-    qnew->data = e;
-    qnew->next = NULL;
-    Q.rear->next = qnew;
-    Q.rear = qnew;
+    linklist qnew=(linklist)malloc(sizeof(LNode));
+    qnew->e=newtree;
+    qnew->next=NULL;
+    Q.rear->next=qnew;
+    Q.rear=qnew;
 }
 
-void FrontDelete(Queue &Q,ElemType &p)
+void Frontdelete(Queue &Q,Elemtype &detree)
 {
-    if (Q.front == Q.rear)
+    if(Q.front==Q.rear)
     {
-        printf("队链为空\n");
         return;
     }
-    LinkList qnew = Q.front->next;
-    p=qnew->data;
-    Q.front->next = qnew->next;
-    if (Q.rear == qnew)
+    linklist qdel=Q.front->next;
+    Q.front->next=qdel->next;
+    detree=qdel->e;
+    if(Q.rear==qdel)
     {
-        Q.rear = Q.front;
+        Q.rear=Q.front;
     }
-    free(qnew);
-}
-
-bool Isempty(Queue Q)
-{
-    if (Q.front == Q.rear)
-    {
-        return true;
-    }
-    return false;
+    free(qdel);
 }
