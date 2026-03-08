@@ -36,7 +36,7 @@ void Treebuild(tree &t,Queue &Q)
     t=root;
 }
 
-void PreOrder(tree t)
+void PreOrder(tree t)//前序，深度优先
 {
     if(t!=NULL)
     {
@@ -46,7 +46,7 @@ void PreOrder(tree t)
     }
 }
 
-void InOrder(tree t)
+void InOrder(tree t)//中序
 {
     if (t != NULL)
     {
@@ -56,7 +56,7 @@ void InOrder(tree t)
     }
 }
 
-void PostOrder(tree t)
+void PostOrder(tree t)//后续
 {
     if (t != NULL)
     {
@@ -66,7 +66,7 @@ void PostOrder(tree t)
     }
 }
 
-void LevelOrder(tree t)
+void LevelOrder(tree t)//广度优先
 {
     Queue Q;
     tree detree;
